@@ -9,13 +9,13 @@ Heartbeat (every 30 min)
          │
          ▼
     ┌─────────────────┐
-    │  Scan Jira       │  Fetch all To-Do tickets across all boards
-    │  Boards          │
+    │  Scan Linear     │  Fetch all Todo issues across all teams
+    │  Teams           │
     └────────┬────────┘
-             │ for each ticket
+             │ for each issue
              ▼
     ┌─────────────────┐
-    │  Ticket          │  Read ticket, classify: bug or feature
+    │  Issue           │  Read issue, classify: bug or feature
     │  Classifier      │  Extract: summary, context, affected areas
     └────────┬────────┘
              │
@@ -37,8 +37,8 @@ Heartbeat (every 30 min)
              ▼
     ┌─────────────────┐
     │  Plan Writer     │  Assemble: RCA/TRD + code changes + plan
-    │                  │  Post to Jira ticket as comment
-    │                  │  Transition ticket → IN DEVELOPMENT
+    │                  │  Post to Linear issue as comment
+    │                  │  Transition issue → In Progress
     └─────────────────┘
 ```
 
@@ -51,6 +51,7 @@ pathfinder/
 ├── HEARTBEAT.md            30-min autonomous cycle definition
 ├── ARCHITECTURE.md         This file — how it all connects
 ├── README.md               Overview and quick start
+├── TOOLS.md                Tooling reference (linearis CLI, gh, etc.)
 │
 ├── knowledge-graph/        Obsidian vault — repo knowledge base
 │   ├── repos/              Per-repo knowledge files
@@ -63,22 +64,22 @@ pathfinder/
 │   └── README.md           How to use the knowledge graph
 │
 ├── skills/                 Analysis methodologies (the knowledge base)
-│   ├── ticket-analysis/    How to read and classify tickets
+│   ├── ticket-analysis/    How to read and classify issues
 │   ├── rca/                Root cause analysis methodology
 │   ├── trd-generation/     TRD structure and best practices
 │   ├── code-change-detection/  How to find affected code
 │   └── knowledge-graph/    How to consult and maintain the graph
 │
 ├── agents/                 Sub-agent definitions
-│   ├── ticket-classifier.md   Read and classify tickets
+│   ├── ticket-classifier.md   Read and classify issues
 │   ├── rca-agent.md           Root cause analysis for bugs
 │   ├── trd-agent.md           TRD generation for features
 │   ├── repo-scanner.md        Find code change locations
 │   └── plan-writer.md         Assemble and post final plan
 │
 ├── commands/               Slash commands
-│   ├── intake.md           /intake — process all To-Do tickets
-│   ├── analyze.md          /analyze <key> — analyze a specific ticket
+│   ├── intake.md           /intake — process all Todo issues
+│   ├── analyze.md          /analyze <key> — analyze a specific issue
 │   ├── rca.md              /rca <key> — generate RCA
 │   ├── trd.md              /trd <key> — generate TRD
 │   └── graph.md            /graph — rebuild knowledge graph
@@ -106,14 +107,14 @@ The Obsidian vault is Pathfinder's understanding of the codebase landscape. Each
 
 The connections file maps how services talk to each other — gRPC calls, Kafka topics, shared models.
 
-### Ticket Classification
-Pathfinder classifies tickets using signals from the Jira ticket:
-- **Bug signals:** "bug" type, error descriptions, "fix", "broken", "regression", stack traces
-- **Feature signals:** "story"/"task" type, "add", "implement", "new", "support", "enable"
-- **Ambiguous:** When unclear, Pathfinder reads linked tickets and comments for additional context
+### Issue Classification
+Pathfinder classifies issues using signals from the Linear issue:
+- **Bug signals:** "Bug" label, error descriptions, "fix", "broken", "regression", stack traces
+- **Feature signals:** "Feature"/"Improvement" label, "add", "implement", "new", "support", "enable"
+- **Ambiguous:** When unclear, Pathfinder reads linked issues and comments for additional context
 
 ### HITL Gate
-Pathfinder does NOT auto-assign or start coding. Moving to "IN DEVELOPMENT" is the signal that:
+Pathfinder does NOT auto-assign or start coding. Moving to "In Progress" is the signal that:
 1. Analysis is complete
 2. A plan with RCA/TRD + code changes is attached
 3. A human should review the plan before coding begins

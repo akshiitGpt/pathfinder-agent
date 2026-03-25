@@ -40,7 +40,7 @@ You find exact code change locations in repositories. You take domain areas and 
 ## Output Format
 
 ```markdown
-# Code Change Map: {PROJ-KEY}
+# Code Change Map: {ID}
 
 ## Repos Affected
 {list of repos with brief role description}

@@ -2,30 +2,31 @@
 
 ## Purpose
 
-Every 30 minutes: scan Jira boards, find To-Do tickets, classify, analyze, plan, post, transition. No fluff.
+Every 30 minutes: scan Linear teams, find Todo issues, classify, analyze, plan, post, transition. No fluff.
 
 ---
 
 ## Checklist (run every heartbeat)
 
-### 1. Scan All Jira Boards
+### 1. Scan All Linear Teams
 
-Fetch all tickets in To-Do status across all Ruh AI Jira projects.
+Fetch all issues in Todo status across all Ruh AI Linear teams.
 
 ```
-For each project:
-  → Search: status = "To Do" AND updated >= -30m (or unprocessed)
-  → Skip tickets already processed (check memory/processed-tickets.json)
-  → Queue unprocessed tickets for analysis
+For each team:
+  → Search: linearis issues search "" --status "Todo"
+  → Skip issues already processed (check memory/processed-issues.json)
+  → Queue unprocessed issues for analysis
 ```
 
-If no new To-Do tickets → `HEARTBEAT_OK`
+If no new Todo issues → `HEARTBEAT_OK`
 
-### 2. For Each Unprocessed Ticket
+### 2. For Each Unprocessed Issue
 
-#### 2a. Read the Ticket
-- Read title, description, comments, linked issues, parent epic
-- Read issue type, priority, labels, components
+#### 2a. Read the Issue
+- Use `linearis issues read <ID>` to fetch full issue data
+- Read title, description, comments, linked issues, parent issue
+- Read state, priority, labels, team, project
 - Check for attachments (error logs, screenshots, specs)
 
 #### 2b. Classify: Bug or Feature
@@ -37,14 +38,14 @@ If no new To-Do tickets → `HEARTBEAT_OK`
 
 **Bug path:**
 1. Load `skills/rca/SKILL.md`
-2. Identify symptom from ticket description
+2. Identify symptom from issue description
 3. Consult `knowledge-graph/` to trace probable cause
 4. Go into affected repo(s) — read actual code to confirm root cause
 5. Generate RCA using `templates/rca-template.md`
 
 **Feature path:**
 1. Load `skills/trd-generation/SKILL.md`
-2. Extract requirements from ticket description
+2. Extract requirements from issue description
 3. Consult `knowledge-graph/` to identify affected services
 4. Go into affected repo(s) — identify specific files and functions
 5. Generate TRD using `templates/trd-template.md`
@@ -61,13 +62,19 @@ If no new To-Do tickets → `HEARTBEAT_OK`
 2. Use `templates/plan-template.md` format
 3. Include complexity estimate (S/M/L/XL)
 
-#### 2f. Post to Jira
-1. Add plan as a comment on the ticket
-2. Transition ticket status → IN DEVELOPMENT
-3. Record in `memory/processed-tickets.json`:
+#### 2f. Post to Linear
+1. Add plan as a comment on the issue:
+   ```bash
+   linearis comments create <ID> --body "plan content here"
+   ```
+2. Transition issue status to In Progress:
+   ```bash
+   linearis issues update <ID> --status "In Progress"
+   ```
+3. Record in `memory/processed-issues.json`:
    ```json
    {
-     "PROJ-123": {
+     "ABC-123": {
        "processed": "2026-03-25T10:30:00Z",
        "classification": "feature",
        "repos_affected": ["agent-gateway", "communication-service"],
@@ -78,7 +85,7 @@ If no new To-Do tickets → `HEARTBEAT_OK`
 
 ### 3. Post-Cycle Check
 
-- Any tickets that failed analysis? → Log error, retry next cycle
+- Any issues that failed analysis? → Log error, retry next cycle
 - Knowledge graph gaps discovered? → Note them for `/graph` update
 
 ---
@@ -87,25 +94,25 @@ If no new To-Do tickets → `HEARTBEAT_OK`
 
 Nothing to do:
 ```
-HEARTBEAT_OK — No new To-Do tickets found
+HEARTBEAT_OK — No new Todo issues found
 ```
 
-Tickets processed:
+Issues processed:
 ```
-🧭 Pathfinder — Processed 3 tickets
+Pathfinder — Processed 3 issues
 
-✅ RP-400 (bug) → RCA posted, moved to IN DEVELOPMENT
+RP-400 (bug) → RCA posted, moved to In Progress
    Repos: agent-gateway, communication-service | Complexity: M
 
-✅ RP-401 (feature) → TRD posted, moved to IN DEVELOPMENT
+RP-401 (feature) → TRD posted, moved to In Progress
    Repos: agent-platform-v2 | Complexity: S
 
-⚠️ RP-402 (feature) → Analysis incomplete — missing acceptance criteria
-   Action: Added comment requesting clarification, left in To-Do
+RP-402 (feature) → Analysis incomplete — missing acceptance criteria
+   Action: Added comment requesting clarification, left in Todo
 ```
 
 Error:
 ```
-❌ RP-403 — Failed to analyze: could not access repo agent-platform-v2
+RP-403 — Failed to analyze: could not access repo agent-platform-v2
    Action: Will retry next heartbeat
 ```

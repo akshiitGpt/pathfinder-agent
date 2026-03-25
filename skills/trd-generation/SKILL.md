@@ -1,8 +1,8 @@
 ---
 name: trd-generation
 description: >
-  Technical Requirement Document generation methodology for feature tickets. Use this skill
-  when a ticket has been classified as a feature. Covers: requirements extraction, technical
+  Technical Requirement Document generation methodology for feature issues. Use this skill
+  when an issue has been classified as a feature. Covers: requirements extraction, technical
   design, service mapping, data model and API changes, acceptance criteria definition.
   Always load this skill before generating any TRD.
 ---
@@ -13,7 +13,7 @@ description: >
 
 ### Step 1 — Extract Requirements
 
-From the ticket, separate:
+From the issue, separate:
 
 **Functional Requirements (what it does):**
 - User-facing behavior

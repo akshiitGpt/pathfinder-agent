@@ -1,22 +1,22 @@
-# Pathfinder 🧭
+# Pathfinder
 
-> Autonomous pre-coding agent that analyzes Jira tickets, generates TRDs and RCAs, identifies code changes, and prepares everything before development begins.
+> Autonomous pre-coding agent that analyzes Linear issues, generates TRDs and RCAs, identifies code changes, and prepares everything before development begins.
 
-Pathfinder is an AI-powered pre-coding agent built on [OpenClaw](https://openclaw.com). It runs every 30 minutes, scans Jira boards for To-Do tickets, classifies them as bugs or features, performs deep analysis, and produces actionable development plans — all before a developer touches the code.
+Pathfinder is an AI-powered pre-coding agent built on [OpenClaw](https://openclaw.com). It runs every 30 minutes, scans Linear teams for Todo issues, classifies them as bugs or features, performs deep analysis, and produces actionable development plans — all before a developer touches the code.
 
 ## What Pathfinder Does
 
 Every 30 minutes:
 
-1. **Scans Jira boards** for tickets in To-Do status
-2. **Classifies** each ticket as a bug or a feature
+1. **Scans Linear teams** for issues in Todo status
+2. **Classifies** each issue as a bug or a feature
 3. **Bug** → generates a Root Cause Analysis (RCA)
 4. **Feature** → generates a Technical Requirement Document (TRD)
 5. **Consults the knowledge graph** (Obsidian vault) to understand repo landscape and connections
 6. **Identifies affected repos** and pinpoints exact code change locations
 7. **Assembles a plan** with TRD/RCA + code change mapping
-8. **Posts the plan** back to the Jira ticket as a comment
-9. **Transitions the ticket** to "IN DEVELOPMENT"
+8. **Posts the plan** back to the Linear issue as a comment
+9. **Transitions the issue** to "In Progress"
 
 ## The Knowledge Graph
 
@@ -44,27 +44,27 @@ Pathfinder spawns specialized sub-agents for each phase:
 
 | Agent | Role |
 |-------|------|
-| **Ticket Classifier** | Read ticket, classify as bug/feature, extract context |
+| **Issue Classifier** | Read issue, classify as bug/feature, extract context |
 | **RCA Agent** | Root cause analysis for bugs — trace symptoms to source |
 | **TRD Agent** | Technical requirement doc for features — scope, design, acceptance criteria |
 | **Repo Scanner** | Scan repos, find exact files/functions that need changes |
-| **Plan Writer** | Assemble final plan, post to Jira, transition ticket |
+| **Plan Writer** | Assemble final plan, post to Linear, transition issue |
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the full flow.
 
 ## Commands
 
 ```bash
-# Process all To-Do tickets across all boards
+# Process all Todo issues across all teams
 /intake
 
-# Analyze a specific ticket
+# Analyze a specific issue
 /analyze RP-365
 
-# Generate RCA for a bug ticket
+# Generate RCA for a bug issue
 /rca RP-400
 
-# Generate TRD for a feature ticket
+# Generate TRD for a feature issue
 /trd RP-401
 
 # Rebuild the knowledge graph
@@ -78,16 +78,18 @@ Pathfinder runs as an [OpenClaw](https://openclaw.com) workspace agent.
 1. Install OpenClaw
 2. Clone this repo into your OpenClaw workspace directory
 3. Copy `USER.md.template` to `USER.md` and fill in your details
-4. Configure the agent in your OpenClaw config with a 30-minute heartbeat
-5. Populate the knowledge graph (or run `/graph` to auto-generate)
+4. Set `LINEAR_API_TOKEN` environment variable (or store in `~/.linear_api_token`)
+5. Install the Linear CLI: `npm install -g linearis`
+6. Configure the agent in your OpenClaw config with a 30-minute heartbeat
+7. Populate the knowledge graph (or run `/graph` to auto-generate)
 
 ## Key Design Decisions
 
-- **30-minute heartbeat** — frequent enough to catch new tickets, not so frequent it spams
+- **30-minute heartbeat** — frequent enough to catch new issues, not so frequent it spams
 - **Classify first, then analyze** — don't waste time generating a TRD for a bug
 - **Knowledge graph is the brain** — without repo context, code change identification is guessing
-- **Post to Jira, don't create PRs** — Pathfinder prepares the plan, developers execute it
-- **HITL gate** — the ticket moves to IN DEVELOPMENT as a signal for human review before coding starts
+- **Post to Linear, don't create PRs** — Pathfinder prepares the plan, developers execute it
+- **HITL gate** — the issue moves to In Progress as a signal for human review before coding starts
 - **Never modify code** — Pathfinder reads, analyzes, and plans. It never writes production code.
 
 ## License

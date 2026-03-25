@@ -1,36 +1,34 @@
 ---
 name: ticket-analysis
 description: >
-  Methodology for reading, understanding, and classifying Jira tickets. Use this skill when
-  processing a new ticket from any Jira board. Covers: reading all ticket fields, extracting
+  Methodology for reading, understanding, and classifying Linear issues. Use this skill when
+  processing a new issue from any Linear team. Covers: reading all issue fields, extracting
   context from linked issues and comments, classifying as bug vs feature, and identifying
-  affected domain areas. Always load this skill before classifying any ticket.
+  affected domain areas. Always load this skill before classifying any issue.
 ---
 
-# Ticket Analysis Skill
+# Issue Analysis Skill
 
-## Phase 1 — Fetch Ticket Data
+## Phase 1 — Fetch Issue Data
 
-Retrieve all available information:
+Retrieve all available information via `linearis issues read <ID>`:
 
 ```
 Fields to read:
-- summary (title)
-- description (full body)
-- issuetype (Bug, Story, Task, Subtask, Epic)
-- priority (Highest, High, Medium, Low, Lowest)
-- status (To Do, In Progress, Done, etc.)
-- labels
-- components
-- assignee, reporter
-- created, updated dates
-- parent (epic or parent task)
-- issuelinks (blocks, is blocked by, relates to)
-- subtasks
+- identifier (e.g., ABC-123)
+- title
+- description (markdown)
+- state (Todo, In Progress, Done, Cancelled, etc.)
+- priority (0=No priority, 1=Urgent, 2=High, 3=Medium, 4=Low)
+- labels (array of label names — e.g., Bug, Feature, Improvement)
+- assignee
+- team
+- project
+- cycle (sprint equivalent)
+- parent (parent issue)
+- relations (blocked by, blocks, related, duplicate)
 - comments (latest 10)
 - attachments (names and types — look for logs, screenshots, specs)
-- sprint
-- fix versions
 ```
 
 ## Phase 2 — Extract Context
@@ -50,29 +48,29 @@ Read beyond the surface:
 - Are there clarifications from the reporter?
 - Has anyone identified the root cause already?
 
-### From linked issues:
+### From linked issues (relations):
 - Is this part of a larger initiative?
 - Are there blocking dependencies?
 - Have related bugs been fixed before?
 
-### From the parent epic:
+### From the parent issue:
 - What's the broader goal?
-- What constraints does the epic set?
+- What constraints does the parent set?
 
 ## Phase 3 — Classify
 
 ### Bug Signals (any 2+ = bug)
-- Issue type is explicitly "Bug"
+- Label is "Bug"
 - Description contains error messages or stack traces
 - Words present: "fix", "broken", "not working", "error", "fails", "crash", "regression", "wrong", "incorrect", "unexpected behavior"
 - Linked to production incidents or hotfix branches
 - Reporter describes "it used to work but now..."
 
 ### Feature Signals (any 2+ = feature)
-- Issue type is "Story", "Task", "Subtask", or "Epic"
+- Label is "Feature", "Improvement", or no bug label
 - Description contains requirements or acceptance criteria
 - Words present: "add", "implement", "new", "support", "enable", "create", "build", "integrate", "enhance"
-- Linked to product roadmap or feature epics
+- Linked to product roadmap projects
 - Contains UI/UX mockups or API specs
 
 ### Ambiguous Cases
@@ -81,7 +79,7 @@ Read beyond the surface:
 
 ## Phase 4 — Identify Domain Areas
 
-Map the ticket to domain areas in the codebase:
+Map the issue to domain areas in the codebase:
 
 | Domain Area | Keywords | Repos Likely Affected |
 |-------------|----------|----------------------|

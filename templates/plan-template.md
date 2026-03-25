@@ -1,4 +1,4 @@
-# Pathfinder Analysis — {PROJ-KEY}
+# Pathfinder Analysis — {ID}
 
 **Classification:** {BUG | FEATURE}
 **Complexity:** {S | M | L | XL}

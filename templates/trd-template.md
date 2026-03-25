@@ -1,4 +1,4 @@
-# TRD: {PROJ-KEY} — {title}
+# TRD: {ID} — {title}
 
 ## Classification
 - **Type:** Feature

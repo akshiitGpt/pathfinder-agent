@@ -1,4 +1,4 @@
-# RCA: {PROJ-KEY} — {title}
+# RCA: {ID} — {title}
 
 ## Classification
 - **Type:** Bug

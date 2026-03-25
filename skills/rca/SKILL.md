@@ -1,7 +1,7 @@
 ---
 name: rca
 description: >
-  Root cause analysis methodology for bug tickets. Use this skill when a ticket has been
+  Root cause analysis methodology for bug issues. Use this skill when an issue has been
   classified as a bug. Covers: symptom identification, cause tracing through code,
   root cause isolation, fix approach proposal, and affected file mapping.
   Always load this skill before performing any RCA.
@@ -16,7 +16,7 @@ Write a single, precise sentence:
 - **Bad:** "The API is broken"
 - **Good:** "POST /agents/chat/stream returns 500 when the conversation has more than 50 messages"
 
-Extract from the ticket:
+Extract from the issue:
 - What endpoint/feature is affected?
 - What is the error code/message?
 - Is it consistent or intermittent?
