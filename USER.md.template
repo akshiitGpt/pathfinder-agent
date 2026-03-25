@@ -1,0 +1,18 @@
+# USER.md
+
+- **Name:** [Your Name]
+- **What to call them:** [Preferred name]
+- **Pronouns:** —
+- **Timezone:** [Your timezone, e.g. Asia/Kolkata]
+- **Notes:** [Brief context about your role and what you build]
+
+## Context
+
+[Add context about your team, repos, and priorities here]
+
+## Jira Configuration
+
+- **Atlassian Site:** [your-team.atlassian.net]
+- **Projects to scan:** [all | specific project keys]
+- **To-Do status name:** [To Do | TODO | your custom status]
+- **In Development status name:** [IN DEVELOPMENT | In Progress | your custom status]
