@@ -13,9 +13,8 @@ Every 30 minutes: scan Linear teams, find Todo issues assigned to the user, clas
 Fetch all issues in Todo status **assigned to the user** across all Ruh AI Linear teams.
 
 ```
-Step 1: Get the user's Linear ID (configured in USER.md)
-Step 2: For each team:
-  → Search: linearis issues search "" --status "Todo" --assignee <USER_LINEAR_ID>
+For each team:
+  → Search: linearis issues search "" --status "Todo" --assignee <USER_EMAIL>
   → Skip issues already processed (check memory/processed-issues.json)
   → Queue unprocessed issues for analysis
 ```

@@ -8,7 +8,7 @@ Usage: `/intake`
 
 ## What it does
 1. Fetches all Linear teams accessible to the agent via `linearis teams list`
-2. For each team, searches for issues in "Todo" status assigned to the user via `linearis issues search "" --status "Todo" --assignee <USER_LINEAR_ID>`
+2. For each team, searches for issues in "Todo" status assigned to the user via `linearis issues search "" --status "Todo" --assignee <USER_EMAIL>`
 3. Filters out already-processed issues (checks `memory/processed-issues.json`)
 4. For each unprocessed issue, runs the full pipeline:
    - Classify (bug/feature)
