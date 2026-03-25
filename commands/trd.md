@@ -7,12 +7,12 @@ description: Generate a Technical Requirement Document for a specific feature is
 Usage: `/trd <issue-id>`
 
 ## What it does
-1. Fetches the specified Linear issue via `linearis issues read <ID>`
+1. Fetches the specified Linear issue via `linear.sh issue <ID>`
 2. Skips classification — treats it as a feature
 3. Spawns the TRD Agent
 4. Identifies code changes via Repo Scanner
-5. Posts TRD + code changes to the issue via `linearis comments create`
-6. Transitions to In Progress via `linearis issues update`
+5. Posts TRD + code changes to the issue via `linear.sh comment <ID> "TRD content"`
+6. Transitions to In Progress via `linear.sh status <ID> progress`
 
 ## Example
 ```

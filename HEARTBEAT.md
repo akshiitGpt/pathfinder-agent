@@ -8,15 +8,14 @@ Every 30 minutes: scan Linear teams, find Todo issues assigned to the user, clas
 
 ## Checklist (run every heartbeat)
 
-### 1. Scan All Linear Teams
+### 1. Scan Linear for Todo Issues
 
-Fetch all issues in Todo status **assigned to the user** across all Ruh AI Linear teams.
+Fetch all issues in Todo status **assigned to you** across all Ruh AI Linear teams.
 
 ```
-For each team:
-  → Search: linearis issues search "" --status "Todo" --assignee <USER_EMAIL>
-  → Skip issues already processed (check memory/processed-issues.json)
-  → Queue unprocessed issues for analysis
+→ Run: linear.sh my-todos
+→ Skip issues already processed (check memory/processed-issues.json)
+→ Queue unprocessed issues for analysis
 ```
 
 If no new Todo issues assigned to the user → `HEARTBEAT_OK`
@@ -24,7 +23,7 @@ If no new Todo issues assigned to the user → `HEARTBEAT_OK`
 ### 2. For Each Unprocessed Issue
 
 #### 2a. Read the Issue
-- Use `linearis issues read <ID>` to fetch full issue data
+- Use `linear.sh issue <ID>` to fetch full issue data
 - Read title, description, comments, linked issues, parent issue
 - Read state, priority, labels, team, project
 - Check for attachments (error logs, screenshots, specs)
@@ -65,11 +64,11 @@ If no new Todo issues assigned to the user → `HEARTBEAT_OK`
 #### 2f. Post to Linear
 1. Add plan as a comment on the issue:
    ```bash
-   linearis comments create <ID> --body "plan content here"
+   linear.sh comment <ID> "plan content here"
    ```
 2. Transition issue status to In Progress:
    ```bash
-   linearis issues update <ID> --status "In Progress"
+   linear.sh status <ID> progress
    ```
 3. Record in `memory/processed-issues.json`:
    ```json

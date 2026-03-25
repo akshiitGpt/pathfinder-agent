@@ -7,14 +7,14 @@ description: Analyze a specific Linear issue — classify, generate RCA/TRD, ide
 Usage: `/analyze <issue-id>`
 
 ## What it does
-1. Fetches the specified Linear issue via `linearis issues read <ID>`
+1. Fetches the specified Linear issue via `linear.sh issue <ID>`
 2. Runs the full Pathfinder pipeline on it:
    - Classify (bug/feature)
    - Generate RCA or TRD
    - Identify code changes
    - Assemble plan
-   - Post to Linear via `linearis comments create`
-   - Transition to In Progress via `linearis issues update`
+   - Post to Linear via `linear.sh comment <ID> "plan content"`
+   - Transition to In Progress via `linear.sh status <ID> progress`
 3. Reports the result
 
 ## Example

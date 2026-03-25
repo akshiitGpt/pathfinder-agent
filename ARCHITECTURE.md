@@ -51,7 +51,7 @@ pathfinder/
 ├── HEARTBEAT.md            30-min autonomous cycle definition
 ├── ARCHITECTURE.md         This file — how it all connects
 ├── README.md               Overview and quick start
-├── TOOLS.md                Tooling reference (linearis CLI, gh, etc.)
+├── TOOLS.md                Tooling reference (linear.sh skill, gh, etc.)
 │
 ├── knowledge-graph/        Obsidian vault — repo knowledge base
 │   ├── repos/              Per-repo knowledge files

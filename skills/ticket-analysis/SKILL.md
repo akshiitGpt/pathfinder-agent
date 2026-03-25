@@ -11,7 +11,7 @@ description: >
 
 ## Phase 1 — Fetch Issue Data
 
-Retrieve all available information via `linearis issues read <ID>`:
+Retrieve all available information via `linear.sh issue <ID>`:
 
 ```
 Fields to read:

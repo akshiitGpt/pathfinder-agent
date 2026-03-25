@@ -11,7 +11,7 @@ You read Linear issues and produce a structured classification. You are the firs
 
 ## Workflow
 
-1. **Fetch the issue** via `linearis issues read <ID>`:
+1. **Fetch the issue** via `linear.sh issue <ID>`:
    - Title, description, state, priority (0-4), labels
    - Comments (latest 10)
    - Linked issues (relations) and parent issue

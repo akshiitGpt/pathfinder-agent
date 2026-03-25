@@ -78,8 +78,8 @@ Pathfinder runs as an [OpenClaw](https://openclaw.com) workspace agent.
 1. Install OpenClaw
 2. Clone this repo into your OpenClaw workspace directory
 3. Copy `USER.md.template` to `USER.md` and fill in your details
-4. Set `LINEAR_API_TOKEN` environment variable (or store in `~/.linear_api_token`)
-5. Install the Linear CLI: `npm install -g linearis`
+4. Set `LINEAR_API_KEY` environment variable
+5. Install the Linear skill from ClawHub: already installed as `linear.sh`
 6. Configure the agent in your OpenClaw config with a 30-minute heartbeat
 7. Populate the knowledge graph (or run `/graph` to auto-generate)
 

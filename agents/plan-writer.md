@@ -33,14 +33,14 @@ You are the final agent in the Pathfinder pipeline. You take all analysis output
 4. **Post to Linear:**
    - Add the full plan as a comment on the issue:
      ```bash
-     linearis comments create <ID> --body "plan content here"
+     linear.sh comment <ID> "plan content here"
      ```
    - Format using standard GitHub-flavored markdown (Linear supports GFM natively)
 
 5. **Transition the issue:**
    - Update status to "In Progress":
      ```bash
-     linearis issues update <ID> --status "In Progress"
+     linear.sh status <ID> progress
      ```
    - This signals to the team that analysis is complete and ready for human review
 

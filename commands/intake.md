@@ -7,17 +7,16 @@ description: Scan all Linear teams for Todo issues assigned to the user and proc
 Usage: `/intake`
 
 ## What it does
-1. Fetches all Linear teams accessible to the agent via `linearis teams list`
-2. For each team, searches for issues in "Todo" status assigned to the user via `linearis issues search "" --status "Todo" --assignee <USER_EMAIL>`
-3. Filters out already-processed issues (checks `memory/processed-issues.json`)
-4. For each unprocessed issue, runs the full pipeline:
+1. Fetches all Todo issues assigned to you via `linear.sh my-todos`
+2. Filters out already-processed issues (checks `memory/processed-issues.json`)
+3. For each unprocessed issue, runs the full pipeline:
    - Classify (bug/feature)
    - Generate RCA or TRD
    - Identify code changes
    - Assemble plan
-   - Post to Linear via `linearis comments create`
-   - Transition to In Progress via `linearis issues update`
-5. Reports summary of processed issues
+   - Post to Linear via `linear.sh comment <ID> "plan content"`
+   - Transition to In Progress via `linear.sh status <ID> progress`
+4. Reports summary of processed issues
 
 ## Example
 ```

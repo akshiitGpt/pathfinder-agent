@@ -2,41 +2,66 @@
 
 ## Core Tools
 
-### Linear CLI (`linearis`)
-Primary tool for all Linear operations. Install: `npm install -g linearis`
-Auth: Set `LINEAR_API_TOKEN` env var or store in `~/.linear_api_token`
+### Linear Skill (`linear.sh`)
+OpenClaw Linear skill for all Linear operations (from clawhub.ai/manuelhettich/linear).
+Auth: Set `LINEAR_API_KEY` env var.
 
-Key commands:
+#### Personal Workflow
 ```bash
-# List Todo issues assigned to you (use your email — linearis resolves it)
-linearis issues search "" --status "Todo" --assignee akshit@ruh.ai
+# Your Todo issues (key command for heartbeat)
+linear.sh my-todos
 
-# List all Todo issues (unfiltered)
-linearis issues search "" --status "Todo"
+# All issues assigned to you
+linear.sh my-issues
 
-# Read a specific issue
-linearis issues read ABC-123
+# Urgent/high-priority items
+linear.sh urgent
 
-# Search issues by keyword
-linearis issues search "keyword" --team Backend
-
-# Add a comment (post analysis plan)
-linearis comments create ABC-123 --body "plan content here"
-
-# Update issue status to In Progress
-linearis issues update ABC-123 --status "In Progress"
-
-# List teams
-linearis teams list
-
-# List projects
-linearis projects list
-
-# List active cycle/sprint
-linearis cycles list --active
+# Daily standup summary
+linear.sh standup
 ```
 
-All output is JSON — pipe through `jq` for filtering.
+#### Browse & Query
+```bash
+# List all teams
+linear.sh teams
+
+# Issues for a specific team
+linear.sh team <KEY>
+
+# All projects with progress
+linear.sh projects
+
+# Issues in a specific project
+linear.sh project <name>
+```
+
+#### Issue Operations
+```bash
+# Detailed issue info
+linear.sh issue <ID>
+
+# Create a new issue
+linear.sh create <TEAM_KEY> "Title" ["Description"]
+
+# Add a comment to an issue
+linear.sh comment <ID> "text"
+
+# Generate a git branch name for an issue
+linear.sh branch <ID>
+```
+
+#### Status Updates
+```bash
+# Update issue status
+linear.sh status <ID> <todo|progress|review|done|blocked>
+
+# Assign an issue
+linear.sh assign <ID> <userName>
+
+# Set priority
+linear.sh priority <ID> <urgent|high|medium|low|none>
+```
 
 ### GitHub CLI (`gh`)
 For repo operations: cloning, reading code, checking PRs.
@@ -49,5 +74,5 @@ Already authenticated on machine.
 - `Bash` — run shell commands
 
 ## APIs
-- Linear: via `linearis` CLI
+- Linear: via `linear.sh` skill
 - GitHub: via `gh` CLI
