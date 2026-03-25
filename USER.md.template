@@ -13,6 +13,7 @@
 ## Linear Configuration
 
 - **Linear API Token:** [Set LINEAR_API_TOKEN env var or store in ~/.linear_api_token]
+- **Linear User ID:** [Your Linear user ID — run `linearis users list` to find it]
 - **Workspace:** [Your Linear workspace name]
 - **Teams to scan:** [all | specific team names]
 - **Todo status name:** [Todo | your custom status]

@@ -1,5 +1,5 @@
 ---
-description: Scan all Linear teams for Todo issues and process each one through the full Pathfinder pipeline.
+description: Scan all Linear teams for Todo issues assigned to the user and process each one through the full Pathfinder pipeline.
 ---
 
 # /intake
@@ -8,7 +8,7 @@ Usage: `/intake`
 
 ## What it does
 1. Fetches all Linear teams accessible to the agent via `linearis teams list`
-2. For each team, searches for issues in "Todo" status via `linearis issues search "" --status "Todo"`
+2. For each team, searches for issues in "Todo" status assigned to the user via `linearis issues search "" --status "Todo" --assignee <USER_LINEAR_ID>`
 3. Filters out already-processed issues (checks `memory/processed-issues.json`)
 4. For each unprocessed issue, runs the full pipeline:
    - Classify (bug/feature)
@@ -25,7 +25,7 @@ Usage: `/intake`
 
 Pathfinder — Scanning all Linear teams...
 
-Found 3 Todo issues across 2 teams:
+Found 3 Todo issues assigned to you across 2 teams:
   RP-400: "Fix conversation pagination timeout" (Bug)
   RP-401: "Add message reactions" (Feature)
   DS-150: "Support batch inference" (Improvement)

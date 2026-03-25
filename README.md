@@ -8,7 +8,7 @@ Pathfinder is an AI-powered pre-coding agent built on [OpenClaw](https://opencla
 
 Every 30 minutes:
 
-1. **Scans Linear teams** for issues in Todo status
+1. **Scans Linear teams** for issues in Todo status **assigned to you**
 2. **Classifies** each issue as a bug or a feature
 3. **Bug** → generates a Root Cause Analysis (RCA)
 4. **Feature** → generates a Technical Requirement Document (TRD)

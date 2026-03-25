@@ -8,7 +8,10 @@ Auth: Set `LINEAR_API_TOKEN` env var or store in `~/.linear_api_token`
 
 Key commands:
 ```bash
-# List Todo issues across all teams
+# List Todo issues assigned to user across all teams
+linearis issues search "" --status "Todo" --assignee <USER_LINEAR_ID>
+
+# List all Todo issues (unfiltered)
 linearis issues search "" --status "Todo"
 
 # Read a specific issue

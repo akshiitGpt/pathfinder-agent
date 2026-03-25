@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Every 30 minutes: scan Linear teams, find Todo issues, classify, analyze, plan, post, transition. No fluff.
+Every 30 minutes: scan Linear teams, find Todo issues assigned to the user, classify, analyze, plan, post, transition. No fluff.
 
 ---
 
@@ -10,16 +10,17 @@ Every 30 minutes: scan Linear teams, find Todo issues, classify, analyze, plan, 
 
 ### 1. Scan All Linear Teams
 
-Fetch all issues in Todo status across all Ruh AI Linear teams.
+Fetch all issues in Todo status **assigned to the user** across all Ruh AI Linear teams.
 
 ```
-For each team:
-  → Search: linearis issues search "" --status "Todo"
+Step 1: Get the user's Linear ID (configured in USER.md)
+Step 2: For each team:
+  → Search: linearis issues search "" --status "Todo" --assignee <USER_LINEAR_ID>
   → Skip issues already processed (check memory/processed-issues.json)
   → Queue unprocessed issues for analysis
 ```
 
-If no new Todo issues → `HEARTBEAT_OK`
+If no new Todo issues assigned to the user → `HEARTBEAT_OK`
 
 ### 2. For Each Unprocessed Issue
 
