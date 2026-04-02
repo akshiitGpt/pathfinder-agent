@@ -54,7 +54,7 @@ Read existing code patterns FIRST. The design must follow existing conventions:
 
 ### Step 3 — Map Service Impact
 
-Use the knowledge graph to trace the feature through services:
+Use the company docs knowledge base to trace the feature through services:
 
 ```
 Example: "Add message reactions"

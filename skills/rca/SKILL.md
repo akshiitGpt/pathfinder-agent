@@ -32,7 +32,7 @@ Hypothesis 2: Token count exceeds model context window, ai-proxy returns malform
 Hypothesis 3: Redis stream buffer overflows for large conversation histories
 ```
 
-Use the knowledge graph to inform hypotheses — it tells you which services are in the request path.
+Use the company docs knowledge base to inform hypotheses — it tells you which services are in the request path.
 
 ### Step 3 — Trace Through Code
 

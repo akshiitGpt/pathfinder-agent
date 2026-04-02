@@ -24,7 +24,7 @@ Usage: `/analyze <issue-id>`
 
 Pathfinder — Analyzing RP-365...
 
-Issue: "Issue Intake & Analysis — RCA, TRDs, subtask generation, knowledge graph"
+Issue: "Issue Intake & Analysis — RCA, TRDs, subtask generation"
 Classification: feature
 Priority: Medium
 

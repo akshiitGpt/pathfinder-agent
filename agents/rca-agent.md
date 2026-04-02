@@ -19,9 +19,10 @@ You perform root cause analysis for bugs. You take a classified issue and trace 
    - When did it start? (check issue creation date, linked PRs)
    - Is there a stack trace or error log?
 
-4. **Consult the knowledge graph:**
-   - Read `knowledge-graph/repos/*.md` for affected service architecture
-   - Read `knowledge-graph/connections/service-map.md` for cross-service flows
+4. **Consult company docs:**
+   - Search `.company-docs/knowledge-base/services/` for affected service architecture
+   - Read `.company-docs/knowledge-base/architecture/service-map.md` for cross-service flows
+   - Check `.company-docs/knowledge-base/repos/` for code-level repo guides
    - Identify which repo(s) likely own the buggy behavior
 
 5. **Trace through the code:**

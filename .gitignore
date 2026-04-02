@@ -2,8 +2,8 @@
 memory/
 *.json
 
-# Obsidian
-knowledge-graph/.obsidian/
+# Company docs (cloned at runtime)
+.company-docs/
 
 # OS
 .DS_Store

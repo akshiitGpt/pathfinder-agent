@@ -18,17 +18,18 @@
 2. Include frontmatter with description
 3. Define: what it does, example output
 
-## Updating the Knowledge Graph
+## Updating Documentation
 
-1. Repo files go in `knowledge-graph/repos/`
-2. Follow existing repo file structure: Overview → Tech Stack → Architecture → Key Files → Domain Concepts → API Surface → Common Change Patterns → Connections
-3. Update `knowledge-graph/connections/service-map.md` if connections change
-4. Use `[[wikilinks]]` to cross-reference between notes
-5. Always include `Last updated: YYYY-MM-DD`
+Pathfinder uses the [company-docs](https://github.com/akshiitGpt/company-docs) repo as its knowledge base. To update:
+
+1. Clone the company-docs repo separately
+2. Add or edit markdown files in `knowledge-base/` following the existing front-matter format
+3. Commit and push to company-docs — Pathfinder auto-pulls on each session
 
 ## Adding a New Repo to the Portfolio
 
-1. Create `knowledge-graph/repos/{repo-name}.md`
-2. Update `knowledge-graph/connections/service-map.md`
-3. Update the Connected Repositories table in `README.md`
-4. Update domain area mapping in `skills/ticket-analysis/SKILL.md`
+1. Add a service deep dive in `company-docs/knowledge-base/services/{name}/`
+2. Add a code-level guide in `company-docs/knowledge-base/repos/{name}.md`
+3. Update `company-docs/knowledge-base/architecture/service-map.md`
+4. Update the Connected Repositories table in `README.md`
+5. Update domain area mapping in `skills/ticket-analysis/SKILL.md`

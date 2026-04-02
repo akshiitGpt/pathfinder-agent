@@ -8,6 +8,17 @@ Every 30 minutes: scan Linear teams, find Todo issues assigned to the user, clas
 
 ## Checklist (run every heartbeat)
 
+### 0. Pull Latest Company Docs
+
+```bash
+cd .company-docs && git pull --ff-only && cd ..
+```
+
+If `.company-docs/` doesn't exist yet, clone it first:
+```bash
+git clone https://github.com/akshiitGpt/company-docs.git .company-docs
+```
+
 ### 1. Scan Linear for Todo Issues
 
 Fetch all issues in Todo status **assigned to you** across all Ruh AI Linear teams.
@@ -38,21 +49,21 @@ If no new Todo issues assigned to the user → `HEARTBEAT_OK`
 **Bug path:**
 1. Load `skills/rca/SKILL.md`
 2. Identify symptom from issue description
-3. Consult `knowledge-graph/` to trace probable cause
+3. Search `.company-docs/knowledge-base/` to trace probable cause
 4. Go into affected repo(s) — read actual code to confirm root cause
 5. Generate RCA using `templates/rca-template.md`
 
 **Feature path:**
 1. Load `skills/trd-generation/SKILL.md`
 2. Extract requirements from issue description
-3. Consult `knowledge-graph/` to identify affected services
+3. Search `.company-docs/knowledge-base/` to identify affected services
 4. Go into affected repo(s) — identify specific files and functions
 5. Generate TRD using `templates/trd-template.md`
 
 #### 2d. Identify Code Changes
 1. Load `skills/code-change-detection/SKILL.md`
-2. Read `knowledge-graph/connections/service-map.md` for cross-repo impacts
-3. Read relevant `knowledge-graph/repos/*.md` files
+2. Read `.company-docs/knowledge-base/architecture/service-map.md` for cross-repo impacts
+3. Search `.company-docs/knowledge-base/services/` and `repos/` for affected services
 4. Go into each affected repo — find exact files, functions, classes
 5. Document: file path, function/class, what changes, why
 
@@ -85,7 +96,7 @@ If no new Todo issues assigned to the user → `HEARTBEAT_OK`
 ### 3. Post-Cycle Check
 
 - Any issues that failed analysis? → Log error, retry next cycle
-- Knowledge graph gaps discovered? → Note them for `/graph` update
+- Company docs gaps discovered? → Note them for update in company-docs repo
 
 ---
 

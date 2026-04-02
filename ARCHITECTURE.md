@@ -1,6 +1,6 @@
 # Architecture
 
-Pathfinder is an autonomous pre-coding agent built as an OpenClaw workspace. It uses a layered architecture: skills define the analysis methodology, agents execute the work, and the knowledge graph provides codebase context.
+Pathfinder is an autonomous pre-coding agent built as an OpenClaw workspace. It uses a layered architecture: skills define the analysis methodology, agents execute the work, and the company docs knowledge base provides codebase context.
 
 ## How It Works
 
@@ -31,7 +31,7 @@ Heartbeat (every 30 min)
        └──────┬───────┘
               ▼
     ┌─────────────────┐
-    │  Repo Scanner    │  Consult knowledge graph → identify repos
+    │  Repo Scanner    │  Consult company docs → identify repos
     │                  │  Go into each repo → find exact change locations
     └────────┬────────┘
              ▼
@@ -61,23 +61,15 @@ pathfinder/
 ├── README.md               Overview and quick start
 ├── TOOLS.md                Tooling reference (linear.sh skill, gh, etc.)
 │
-├── knowledge-graph/        Obsidian vault — repo knowledge base
-│   ├── repos/              Per-repo knowledge files
-│   │   ├── agent-platform-v2.md
-│   │   ├── agent-gateway.md
-│   │   ├── communication-service.md
-│   │   └── ai-proxy.md
-│   ├── connections/        Inter-repo dependency maps
-│   │   └── service-map.md
-│   └── README.md           How to use the knowledge graph
+├── .company-docs/          Company docs knowledge base (cloned at runtime)
+│   └── knowledge-base/     43 markdown docs — services, architecture, repos, etc.
 │
 ├── skills/                 Analysis methodologies (the knowledge base)
 │   ├── ticket-analysis/    How to read and classify issues
 │   ├── rca/                Root cause analysis methodology
 │   ├── trd-generation/     TRD structure and best practices
 │   ├── code-change-detection/  How to find affected code
-│   ├── subtask-generation/ How to decompose plans into subtasks
-│   └── knowledge-graph/    How to consult and maintain the graph
+│   └── subtask-generation/ How to decompose plans into subtasks
 │
 ├── agents/                 Sub-agent definitions
 │   ├── ticket-classifier.md   Read and classify issues
@@ -91,8 +83,7 @@ pathfinder/
 │   ├── intake.md           /intake — process all Todo issues
 │   ├── analyze.md          /analyze <key> — analyze a specific issue
 │   ├── rca.md              /rca <key> — generate RCA
-│   ├── trd.md              /trd <key> — generate TRD
-│   └── graph.md            /graph — rebuild knowledge graph
+│   └── trd.md              /trd <key> — generate TRD
 │
 └── templates/              Output templates
     ├── trd-template.md     TRD document structure
@@ -105,17 +96,16 @@ pathfinder/
 ### Skills vs Agents
 - **Skills** are knowledge documents — they describe HOW to analyze (RCA methodology, TRD structure, etc.)
 - **Agents** are executors — they READ a skill and DO the work
-- Each agent loads the relevant skill + knowledge graph context before producing output
+- Each agent loads the relevant skill + company docs context before producing output
 
-### The Knowledge Graph
-The Obsidian vault is Pathfinder's understanding of the codebase landscape. Each repo file contains:
-- What the service does
-- Tech stack and key dependencies
-- Architecture and key files
-- API surface (routes, gRPC methods, Kafka topics)
-- Common change patterns
-
-The connections file maps how services talk to each other — gRPC calls, Kafka topics, shared models.
+### Company Docs Knowledge Base
+Pathfinder uses the [company-docs](https://github.com/akshiitGpt/company-docs) repo as its knowledge base. It is cloned at runtime into `.company-docs/` and pulled fresh at the start of every session. The knowledge base contains 43+ markdown docs covering:
+- **Services** — per-service deep dives (overview, API, database, events, dependencies)
+- **Architecture** — system overview, service map, data flow, communication patterns
+- **Repos** — code-level guides (directory structure, entry points, local dev)
+- **Workflows** — end-to-end request flows
+- **Data** — schemas, events, pipelines
+- **Runbooks** — deployments, debugging, incident response
 
 ### Issue Classification
 Pathfinder classifies issues using signals from the Linear issue:

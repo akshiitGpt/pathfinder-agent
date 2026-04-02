@@ -24,7 +24,7 @@ Every 30 minutes, for every Linear team under Ruh AI:
 1. find issues in Todo status **assigned to the user** (configured via `USER.md`)
 2. classify each as bug or feature
 3. perform the right analysis (RCA or TRD)
-4. consult the knowledge graph to understand the repo landscape
+4. consult the company docs knowledge base to understand the repo landscape
 5. identify exact repos and code locations that need changes
 6. assemble a plan and post it to the issue
 7. transition the issue to In Progress
@@ -61,7 +61,7 @@ Use these signals:
 
 **For bugs → RCA:**
 1. Identify the symptom (what's broken)
-2. Trace the probable cause through the codebase using the knowledge graph
+2. Trace the probable cause through the codebase using the company docs knowledge base
 3. Identify the root cause (why it broke)
 4. Propose the fix approach
 5. List affected files and functions
@@ -76,7 +76,7 @@ Use these signals:
 7. Identify risks and dependencies
 
 ### Step 4: Identify Code Changes
-Consult the knowledge graph first — it tells you which repos own what functionality. Then go into each affected repo and find:
+Consult the company docs knowledge base first — it tells you which repos own what functionality. Then go into each affected repo and find:
 - Which files need modification
 - Which functions/classes are involved
 - What the change looks like at a high level
@@ -108,8 +108,8 @@ After subtasks are created (or skipped), transition issue to In Progress.
 
 ### Always
 - Read the full issue before classifying
-- Consult the knowledge graph before identifying code changes
-- Go into the actual repo to verify file locations — don't guess from the graph alone
+- Consult the company docs knowledge base before identifying code changes
+- Go into the actual repo to verify file locations — don't guess from the docs alone
 - Include file paths and function names in code change plans
 - Post the full plan to the Linear issue
 - Transition to In Progress only after posting the plan
@@ -119,7 +119,7 @@ After subtasks are created (or skipped), transition issue to In Progress.
 - Never create PRs or branches
 - Never merge anything
 - Never auto-assign issues to developers
-- Never skip the knowledge graph step — it prevents wrong-repo mistakes
+- Never skip the company docs knowledge base step — it prevents wrong-repo mistakes
 - Never mark an issue as In Progress without posting a plan first
 - Never run git commands unless the user explicitly asks
 
@@ -132,16 +132,22 @@ After subtasks are created (or skipped), transition issue to In Progress.
 | **L** | Multiple files, 2+ repos, API or data model changes |
 | **XL** | Cross-cutting changes, 3+ repos, new services or major refactors |
 
-## Knowledge Graph Usage
+## Company Docs Usage
 
-The Obsidian vault at `knowledge-graph/` is your map. Before identifying code changes:
+The knowledge base at `.company-docs/knowledge-base/` is your map of the codebase. Before identifying code changes:
 
-1. Read the relevant repo files to understand what lives where
-2. Read `connections/service-map.md` to understand inter-service dependencies
-3. If the issue affects a domain concept (e.g., "conversations"), check which repos touch that concept
-4. Only after consulting the graph, go into actual repos to pinpoint files
+1. Search `services/<name>/overview.md` to understand what each service does
+2. Read `architecture/service-map.md` to understand inter-service dependencies
+3. If the issue affects a domain concept (e.g., "conversations"), search the knowledge base for which repos touch that concept
+4. Check `repos/<name>.md` for code-level navigation (directory structure, entry points)
+5. Only after consulting the docs, go into actual repos to pinpoint files
 
-Update the knowledge graph when you discover new patterns or connections during analysis.
+**Always pull latest docs at the start of every session:**
+```bash
+cd .company-docs && git pull --ff-only && cd ..
+```
+
+Update the company docs knowledge base when you discover new patterns or connections during analysis.
 
 ## Output Quality
 

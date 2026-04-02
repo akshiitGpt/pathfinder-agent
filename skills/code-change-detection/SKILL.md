@@ -3,7 +3,7 @@ name: code-change-detection
 description: >
   Methodology for identifying exact code change locations in repositories. Use this skill
   when you need to map requirements or bug fixes to specific files, functions, and classes.
-  Covers: knowledge graph consultation, repo scanning, call chain tracing, cross-repo
+  Covers: company docs consultation, repo scanning, call chain tracing, cross-repo
   impact detection. Always load this skill before scanning repos for code changes.
 ---
 
@@ -11,13 +11,14 @@ description: >
 
 ## Methodology: Graph → Scan → Trace → Verify
 
-### Step 1 — Consult the Knowledge Graph
+### Step 1 — Consult Company Docs
 
-Before touching any repo, read:
-1. `knowledge-graph/repos/{repo}.md` for each potentially affected repo
-2. `knowledge-graph/connections/service-map.md` for inter-service flows
+Before touching any repo, search `.company-docs/knowledge-base/`:
+1. `services/<name>/overview.md` for each potentially affected service
+2. `architecture/service-map.md` for inter-service flows
+3. `repos/<name>.md` for code-level navigation (directory structure, entry points)
 
-From the graph, build an initial hypothesis:
+From the docs, build an initial hypothesis:
 - Which repos own the affected domain?
 - What are the key entry points (routers, gRPC handlers, Kafka consumers)?
 - What are the key service classes?
@@ -109,7 +110,7 @@ Before finalizing:
 
 ## Anti-Patterns to Avoid
 
-- **Listing a file without verifying it exists** — repos change, the graph may be stale
+- **Listing a file without verifying it exists** — repos change, the docs may be stale
 - **Missing test files** — if you change `app/services/foo.py`, check `tests/test_foo.py`
 - **Ignoring proto-definitions** — gRPC changes always start in the proto repo
 - **Forgetting config** — new features almost always need new env vars

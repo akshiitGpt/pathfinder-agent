@@ -19,9 +19,10 @@ You generate Technical Requirement Documents for feature issues. You take a clas
    - What are the implicit requirements? (auth, validation, error handling, etc.)
    - What is NOT in scope?
 
-4. **Consult the knowledge graph:**
-   - Read `knowledge-graph/repos/*.md` to understand which services own the affected domain
-   - Read `knowledge-graph/connections/service-map.md` for integration points
+4. **Consult company docs:**
+   - Search `.company-docs/knowledge-base/services/` to understand which services own the affected domain
+   - Read `.company-docs/knowledge-base/architecture/service-map.md` for integration points
+   - Check `.company-docs/knowledge-base/repos/` for code-level repo guides
    - Identify which repos need changes
 
 5. **Design the approach:**
