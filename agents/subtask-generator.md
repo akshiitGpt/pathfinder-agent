@@ -74,7 +74,7 @@ Do **NOT** generate subtasks when:
        parentId: "<PARENT_ID>",
        state: "Todo",
        priority: <same as parent>,
-       assignee: <same as parent or null>
+       assignee: "me"
      )
      ```
    - After all subtasks are created, set `blocks`/`blockedBy` relations between them
@@ -108,6 +108,7 @@ Subtasks:
 
 - Never create subtasks for S-complexity issues — it's overhead for no value
 - Always set `parentId` — otherwise you create orphan issues, not subtasks
+- Always assign subtasks to the current user (`assignee: "me"`)
 - Always use the same team as the parent issue
 - Keep subtask titles under 80 characters
 - Include file paths in subtask descriptions — developers should know exactly where to look
