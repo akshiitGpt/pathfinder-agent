@@ -15,6 +15,7 @@ Usage: `/intake`
    - Identify code changes
    - Assemble plan
    - Post to Linear via `linear.sh comment <ID> "plan content"`
+   - Generate subtasks (if complexity >= M multi-repo, L, or XL)
    - Transition to In Progress via `linear.sh status <ID> progress`
 4. Reports summary of processed issues
 
@@ -41,6 +42,7 @@ Processing RP-401...
   → TRD generated
   → Code changes: agent-gateway (3 files), communication-service (4 files), proto-definitions (1 file)
   → Plan posted to Linear
+  → Subtasks created: 4 (L complexity, 3 repos)
   → Transitioned to In Progress
 
 Processing DS-150...

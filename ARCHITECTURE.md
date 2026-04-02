@@ -38,8 +38,16 @@ Heartbeat (every 30 min)
     ┌─────────────────┐
     │  Plan Writer     │  Assemble: RCA/TRD + code changes + plan
     │                  │  Post to Linear issue as comment
-    │                  │  Transition issue → In Progress
-    └─────────────────┘
+    └────────┬────────┘
+             │ if M(multi-repo)/L/XL
+             ▼
+    ┌─────────────────┐
+    │  Subtask         │  Break plan into Linear subtasks
+    │  Generator       │  Set parentId, dependencies, sequencing
+    └────────┬────────┘
+             │
+             ▼
+    Transition issue → In Progress
 ```
 
 ## Directory Layout
@@ -68,6 +76,7 @@ pathfinder/
 │   ├── rca/                Root cause analysis methodology
 │   ├── trd-generation/     TRD structure and best practices
 │   ├── code-change-detection/  How to find affected code
+│   ├── subtask-generation/ How to decompose plans into subtasks
 │   └── knowledge-graph/    How to consult and maintain the graph
 │
 ├── agents/                 Sub-agent definitions
@@ -75,7 +84,8 @@ pathfinder/
 │   ├── rca-agent.md           Root cause analysis for bugs
 │   ├── trd-agent.md           TRD generation for features
 │   ├── repo-scanner.md        Find code change locations
-│   └── plan-writer.md         Assemble and post final plan
+│   ├── plan-writer.md         Assemble and post final plan
+│   └── subtask-generator.md   Break plan into Linear subtasks
 │
 ├── commands/               Slash commands
 │   ├── intake.md           /intake — process all Todo issues

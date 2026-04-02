@@ -33,6 +33,18 @@
 - [ ] {Integration tests for cross-service flows}
 - [ ] {Manual verification steps}
 
+### Subtasks
+
+{If complexity >= M with multi-repo, or L/XL:}
+
+| # | Subtask ID | Title | Blocked By |
+|---|-----------|-------|------------|
+| 1 | {ID} | {action-oriented title} | — |
+| 2 | {ID} | {action-oriented title} | {ID} |
+| 3 | {ID} | {action-oriented title} | {ID} |
+
+{If S complexity: "Single-task issue — no subtasks generated."}
+
 ### Risks
 | Risk | Likelihood | Impact | Mitigation |
 |------|-----------|--------|------------|

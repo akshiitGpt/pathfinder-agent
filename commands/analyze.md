@@ -14,6 +14,7 @@ Usage: `/analyze <issue-id>`
    - Identify code changes
    - Assemble plan
    - Post to Linear via `linear.sh comment <ID> "plan content"`
+   - Generate subtasks (if complexity >= M multi-repo, L, or XL)
    - Transition to In Progress via `linear.sh status <ID> progress`
 3. Reports the result
 

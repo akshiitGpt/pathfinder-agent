@@ -37,14 +37,21 @@ You are the final agent in the Pathfinder pipeline. You take all analysis output
      ```
    - Format using standard GitHub-flavored markdown (Linear supports GFM natively)
 
-5. **Transition the issue:**
+5. **Generate subtasks (if needed):**
+   - Evaluate complexity — only generate subtasks for M (multi-repo), L, or XL issues
+   - Invoke the **Subtask Generator** agent with the assembled plan, parent issue ID, and code change map
+   - The Subtask Generator will create Linear subtasks under the parent issue with proper sequencing and dependencies
+   - Receive back the list of created subtask IDs and titles
+   - Append a "Subtasks" section to the Linear comment listing all created subtasks
+
+6. **Transition the issue:**
    - Update status to "In Progress":
      ```bash
      linear.sh status <ID> progress
      ```
    - This signals to the team that analysis is complete and ready for human review
 
-6. **Record processing:**
+7. **Record processing:**
    - Add entry to `memory/processed-issues.json`
 
 ## Output Format (Linear Comment)
@@ -77,6 +84,14 @@ Repos Affected: {repo-1}, {repo-2}
 ### Testing Checklist
 - [ ] {test item 1}
 - [ ] {test item 2}
+
+### Subtasks
+{If subtasks were generated:}
+- [ ] {SUBTASK_ID}: {title}
+- [ ] {SUBTASK_ID}: {title} (blocked by {ID})
+- [ ] {SUBTASK_ID}: {title}
+
+{If no subtasks: "Single-task issue — no subtasks needed."}
 
 ### Risks
 - {risk 1}
