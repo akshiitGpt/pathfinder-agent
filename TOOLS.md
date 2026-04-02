@@ -3,8 +3,8 @@
 ## Core Tools
 
 ### Linear Skill (`linear.sh`)
-OpenClaw Linear skill for all Linear operations (from clawhub.ai/manuelhettich/linear).
-Auth: Set `LINEAR_API_KEY` env var.
+OpenClaw Linear skill installed at `skills/linear/` (from [clawhub.ai/manuelhettich/linear](https://clawhub.ai/manuelhettich/linear)).
+Auth: Set `LINEAR_API_KEY` env var. Optional: `LINEAR_DEFAULT_TEAM` for default team key.
 
 #### Personal Workflow
 ```bash
