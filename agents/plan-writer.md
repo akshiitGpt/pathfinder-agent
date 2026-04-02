@@ -30,19 +30,20 @@ You are the final agent in the Pathfinder pipeline. You take all analysis output
    - Acceptance criteria present (for features)?
    - Testing requirements listed?
 
-4. **Post to Linear:**
-   - Add the full plan as a comment on the issue:
-     ```bash
-     linear.sh comment <ID> "plan content here"
-     ```
-   - Format using standard GitHub-flavored markdown (Linear supports GFM natively)
-
-5. **Generate subtasks (if needed):**
+4. **Generate subtasks (if needed):**
    - Evaluate complexity — only generate subtasks for M (multi-repo), L, or XL issues
    - Invoke the **Subtask Generator** agent with the assembled plan, parent issue ID, and code change map
    - The Subtask Generator will create Linear subtasks under the parent issue with proper sequencing and dependencies
    - Receive back the list of created subtask IDs and titles
-   - Append a "Subtasks" section to the Linear comment listing all created subtasks
+   - Include the subtasks in the plan's "Subtasks" section
+
+5. **Post to Linear:**
+   - Add the full plan (including subtask list) as a comment on the issue:
+     ```bash
+     linear.sh comment <ID> "plan content here"
+     ```
+   - Format using standard GitHub-flavored markdown (Linear supports GFM natively)
+   - The posted plan should already include subtask IDs so the reviewer can see the full breakdown
 
 6. **Transition the issue:**
    - Update status to "In Progress":
@@ -50,6 +51,7 @@ You are the final agent in the Pathfinder pipeline. You take all analysis output
      linear.sh status <ID> progress
      ```
    - This signals to the team that analysis is complete and ready for human review
+   - By this point, the plan AND subtasks are already visible for the reviewer
 
 7. **Record processing:**
    - Add entry to `memory/processed-issues.json`

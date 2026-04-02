@@ -72,8 +72,14 @@ If no new Todo issues assigned to the user → `HEARTBEAT_OK`
 2. Use `templates/plan-template.md` format
 3. Include complexity estimate (S/M/L/XL)
 
-#### 2f. Post to Linear
-1. Add plan as a comment on the issue:
+#### 2f. Generate Subtasks (if needed)
+1. If complexity is M (multi-repo), L, or XL → invoke Subtask Generator
+2. Create subtasks under the parent issue with `parentId`
+3. Set `blocks`/`blockedBy` dependencies between subtasks
+4. Include subtask IDs in the plan
+
+#### 2g. Post to Linear
+1. Add plan (including subtask list) as a comment on the issue:
    ```bash
    linear.sh comment <ID> "plan content here"
    ```

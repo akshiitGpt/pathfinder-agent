@@ -37,7 +37,6 @@ Heartbeat (every 30 min)
              ▼
     ┌─────────────────┐
     │  Plan Writer     │  Assemble: RCA/TRD + code changes + plan
-    │                  │  Post to Linear issue as comment
     └────────┬────────┘
              │ if M(multi-repo)/L/XL
              ▼
@@ -47,7 +46,10 @@ Heartbeat (every 30 min)
     └────────┬────────┘
              │
              ▼
-    Transition issue → In Progress
+    Post plan + subtasks to Linear issue as comment
+             │
+             ▼
+    Transition issue → In Progress (HITL review gate)
 ```
 
 ## Directory Layout
@@ -117,4 +119,5 @@ Pathfinder classifies issues using signals from the Linear issue:
 Pathfinder does NOT auto-assign or start coding. Moving to "In Progress" is the signal that:
 1. Analysis is complete
 2. A plan with RCA/TRD + code changes is attached
-3. A human should review the plan before coding begins
+3. Subtasks have been created (for M/L/XL issues) with dependencies set
+4. A human should review the plan and subtasks before coding begins

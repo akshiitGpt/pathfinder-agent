@@ -13,8 +13,8 @@ Usage: `/analyze <issue-id>`
    - Generate RCA or TRD
    - Identify code changes
    - Assemble plan
-   - Post to Linear via `linear.sh comment <ID> "plan content"`
    - Generate subtasks (if complexity >= M multi-repo, L, or XL)
+   - Post plan + subtasks to Linear via `linear.sh comment <ID> "plan content"`
    - Transition to In Progress via `linear.sh status <ID> progress`
 3. Reports the result
 

@@ -14,8 +14,8 @@ Usage: `/intake`
    - Generate RCA or TRD
    - Identify code changes
    - Assemble plan
-   - Post to Linear via `linear.sh comment <ID> "plan content"`
    - Generate subtasks (if complexity >= M multi-repo, L, or XL)
+   - Post plan + subtasks to Linear via `linear.sh comment <ID> "plan content"`
    - Transition to In Progress via `linear.sh status <ID> progress`
 4. Reports summary of processed issues
 
